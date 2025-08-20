@@ -69,11 +69,3 @@ async def get_current_user(token: Annotated[str, Depends(outh2_bearer)]):
 
 
 user_dependency = Annotated[dict, Depends(get_current_user)]
-
-"""
-{
-  "username": "lorena",
-  "email": "loresofia@example.com",
-  "password": "sup3r4t3"
-}
-"""
