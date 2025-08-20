@@ -1,0 +1,15 @@
+line-length = 88
+exclude = ["apps/**/migrations/*.py", "venv", ".venv", "settings.py"]
+
+[lint]
+select = [
+    "F",
+    "E",
+    "W",
+    "I",
+    "N",
+    "S",
+    "B",
+    "DJ",
+    "PL",
+]
