@@ -4,9 +4,12 @@ from database import SessionLocal
 from fastapi import Depends
 from typing import Annotated
 from sqlalchemy.orm import Session
+from decouple import config
 
-SECRET_KEY = "197b2c37c391bed93fe80344fe73b806947a65e36206e05a1a23c2fa12702fe4"
-ALGORITHM = "HS256"
+SECRET_KEY = config("SECRET_KEY")
+ALGORITHM = config("ALGORITHM")
+TOKEN_TYPE = config("TOKEN_TYPE")
+SQLALCHEMY_DATABASE_URL = config("SQLALCHEMY_DATABASE_URL")
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 outh2_bearer = OAuth2PasswordBearer(tokenUrl="token")
 
