@@ -2,7 +2,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
-from sqlalchemy.orm import Session
 
 from apps.authentication.pydantic_models.token import Token
 from apps.authentication.pydantic_models.user import CreateUserRequest
@@ -11,20 +10,9 @@ from apps.authentication.views.py_jwt_auth import (
     create_user,
     user_dependency,
 )
-from database import SessionLocal
+from database import db_dependency
 
 router = APIRouter(prefix="/py_jwt_auth", tags=["auth"])
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-db_dependency = Annotated[Session, Depends(get_db)]
 
 
 @router.post("/create_user", status_code=status.HTTP_201_CREATED)

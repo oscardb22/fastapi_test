@@ -9,7 +9,8 @@ from loguru import logger
 from apps.authentication.models.user import Users
 from apps.authentication.pydantic_models.token import Token
 from apps.authentication.pydantic_models.user import CreateUserRequest
-from settings import ALGORITHM, SECRET_KEY, bcrypt_context, db_dependency, outh2_bearer
+from database import db_dependency
+from settings import ALGORITHM, SECRET_KEY, bcrypt_context, outh2_bearer
 
 
 def create_user(db: db_dependency, create_jose_user_request: CreateUserRequest):
