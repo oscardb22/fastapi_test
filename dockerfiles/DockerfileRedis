@@ -1,0 +1,7 @@
+FROM redis:latest
+
+LABEL authors="odb13"
+
+EXPOSE 6379
+
+CMD ["redis-server"]

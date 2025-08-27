@@ -1,0 +1,9 @@
+# Use the official Memcached image as the base
+FROM memcached:latest
+
+# Expose the default Memcached port
+EXPOSE 11211
+
+# You can add further configurations or dependencies here if required for your application.
+# For example, to set a specific memory limit for Memcached:
+CMD ["memcached", "-m", "64"]

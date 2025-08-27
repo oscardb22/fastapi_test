@@ -1,0 +1,37 @@
+services:
+  local_dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8001:8001"
+    networks:
+      - internal_network
+      - global_network
+    # Optional: persist data
+    # volumes:
+    #   - ./data:/home/local_dynamodb/data
+  local_redis:
+    restart: "unless-stopped"
+    build:
+      context: .
+      dockerfile: ./dockerfiles/DockerfileRedis
+    ports:
+      - "6379:6379"
+    networks:
+      - internal_network
+      - global_network
+  local_memcache:
+    restart: "unless-stopped"
+    build:
+      context: .
+      dockerfile: ./dockerfiles/DockerfileMemCache
+    ports:
+      - "11211:11211"
+    networks:
+      - internal_network
+      - global_network
+networks:
+  internal_network:
+    driver: bridge
+  global_network:
+    driver: bridge
