@@ -1,0 +1,20 @@
+# Use a base image with Java, as ElasticMQ is Java-based
+FROM openjdk:8-jre-alpine
+
+LABEL authors="odb13"
+
+# Set working directory
+WORKDIR /app
+
+# Download ElasticMQ server JAR
+ADD https://s3-eu-west-1.amazonaws.com/softwaremill-public/elasticmq-server-1.5.7.jar /app/elasticmq-server.jar
+
+# (Optional) Copy a custom configuration file for ElasticMQ
+# COPY custom.conf /app/custom.conf
+
+# Expose the default ElasticMQ port
+EXPOSE 9324
+
+# Command to run ElasticMQ
+# If using a custom config: CMD ["java", "-Dconfig.file=custom.conf", "-jar", "elasticmq-server.jar"]
+CMD ["java", "-jar", "elasticmq-server.jar"]

@@ -1,0 +1,27 @@
+# Use the official RabbitMQ image as the base
+FROM rabbitmq:3-management
+
+LABEL authors="odb13"
+
+# Optional: Install any additional packages if needed
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     some-package \
+#     && rm -rf /var/lib/apt/lists/*
+
+# Copy custom RabbitMQ configuration file (if required)
+# This assumes you have a rabbitmq.conf file in the same directory as your Dockerfile
+# COPY rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
+
+# Copy custom RabbitMQ definitions file (if required)
+# This assumes you have a definitions.json file in the same directory as your Dockerfile
+# COPY definitions.json /etc/rabbitmq/definitions.json
+
+# Expose the default RabbitMQ and Management plugin ports
+EXPOSE 5672 15672
+
+# Set environment variables for default user and password (optional, can also be done during docker run)
+# ENV RABBITMQ_DEFAULT_USER=myuser
+# ENV RABBITMQ_DEFAULT_PASS=mypassword
+
+# Command to run RabbitMQ (default in base image, but can be overridden)
+# CMD ["rabbitmq-server"]
