@@ -1,10 +1,7 @@
-from typing import Annotated
-
-from fastapi import APIRouter, Depends, status
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, status
 
 from apps.authentication.pydantic_models.token import Token
-from apps.authentication.pydantic_models.user import CreateUserRequest
+from apps.authentication.pydantic_models.user import CreateUserRequest, LoginUserRequest
 from apps.authentication.views.py_jwt_auth import (
     auth_user,
     create_user,
@@ -26,7 +23,7 @@ async def route_create_user(
 
 @router.post("/token", status_code=status.HTTP_200_OK, response_model=Token)
 async def route_auth_user(
-    db: db_dependency, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
+    db: db_dependency, form_data: LoginUserRequest
 ):
     return auth_user(
         user_name_or_email=form_data.username, password=form_data.password, db=db
