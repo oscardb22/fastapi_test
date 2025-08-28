@@ -1,0 +1,19 @@
+# Use the official OpenSearch base image
+FROM opensearchproject/opensearch:latest
+
+LABEL authors="odb13"
+
+# Set environment variables (optional, can be passed during docker run or in docker-compose)
+# ENV discovery.type=single-node
+# ENV plugins.security.disabled=true
+
+# Expose the default OpenSearch port
+EXPOSE 9200
+EXPOSE 9600
+
+# You can add custom configurations by mounting a custom opensearch.yml
+# For example, to add a custom opensearch.yml:
+# COPY opensearch.yml /usr/share/opensearch/config/opensearch.yml
+
+# You can install plugins if needed
+# RUN bin/opensearch-plugin install <plugin-name>

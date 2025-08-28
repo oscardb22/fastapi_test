@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Annotated
 
 from fastapi import Depends, status
@@ -6,7 +6,7 @@ from fastapi.exceptions import HTTPException
 from jose import JWTError, jwt
 from loguru import logger
 
-from apps.authentication.models.user import Users
+from apps.authentication.models.user import Tokens, Users
 from apps.authentication.pydantic_models.token import Token
 from apps.authentication.pydantic_models.user import CreateUserRequest
 from database import db_dependency
@@ -24,7 +24,7 @@ def create_user(db: db_dependency, create_jose_user_request: CreateUserRequest):
 
 
 def create_access_token(username: str, user_id: int, expires_delta: timedelta):
-    encode = {"sub": username, "id": user_id, "exp": datetime.utcnow() + expires_delta}
+    encode = {"sub": username, "id": user_id, "exp": datetime.now(UTC) + expires_delta}
     return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
@@ -47,15 +47,35 @@ def auth_user(user_name_or_email: str, password: str, db):
         user_id=user_data.id,
         expires_delta=timedelta(minutes=20),
     )
+    token_model = Tokens(user=user_data, token=access_token)
+    db.add(token_model)
+    db.commit()
     return Token(access_token=access_token)
 
 
 async def get_current_user(token: Annotated[str, Depends(outh2_bearer)]):
+    db = db_dependency()
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub", None)
         user_id = payload.get("id", None)
         if username is None or user_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Could not validate user.",
+            )
+        user_data = db.query(Users).filter(Users.id == user_id).first()
+        if user_data is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Could not validate user.",
+            )
+        token_data = (
+            db.query(Tokens)
+            .filter(Tokens.user_id == user_id, Tokens.token == token)
+            .first()
+        )
+        if token_data is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Could not validate user.",

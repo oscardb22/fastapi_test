@@ -1,6 +1,8 @@
 # Use the official Memcached image as the base
 FROM memcached:latest
 
+LABEL authors="odb13"
+
 # Expose the default Memcached port
 EXPOSE 11211
 
