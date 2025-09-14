@@ -187,3 +187,4 @@ keys/
 
 vars.dev.env
 vars.dev.env.example
+*.db

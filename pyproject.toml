@@ -1,0 +1,98 @@
+[project]
+name = "MY_FASTAPI"
+version = "0.0.1"
+description = "All my knowlege about FastApi"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.16.5",
+    "bcrypt==4.3.0",
+    "boto3>=1.40.22",
+    "email-validator>=2.3.0",
+    "fastapi>=0.116.1",
+    "fastapi-cache2-fork==2.2.1",
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "mangum>=0.19.0",
+    "openai==1.101.0",
+    "passlib[bcrypt]>=1.7.4",
+    "psycopg2-binary==2.9.10",
+    "psycopg[binary]==3.2.9",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "pyjwt>=2.10.1",
+    "python-jose[cryptography]==3.5.0",
+    "python-multipart>=0.0.20",
+    "redis==6.4.0",
+    "requests==2.32.5",
+    "ruff==0.12.9",
+    "sentry-sdk[fastapi]>=2.33.0",
+    "sqlmodel>=0.0.24",
+    "tenacity==9.1.2",
+    "uvicorn>=0.35.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.4.1",
+    "mypy>=1.17.1",
+    "ruff>=0.12.9",
+    "coverage>=7.10.6",
+    "factory-boy>=3.3.3",
+    "pytest-cov>=7.0.0",
+]
+
+[tool.coverage.run]
+omit = ["conftest.py", "__init__.py"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--maxfail=1 --cov=app/tests -ra -q"
+testpaths = [
+    "app/tests",
+    "integration",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.mypy]
+strict = true
+exclude = ["venv", ".venv", "alembic"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+exclude = ["alembic", "*/migrations/*.py", "venv", ".venv"]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "ARG001", # unused arguments in functions
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "W191",  # indentation contains tabs
+    "B904",  # Allow raising exceptions without from e, for HTTPException
+    "F403",  #
+    "F405",  #
+    "E722",  #
+    "E721",  #
+]
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
