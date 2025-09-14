@@ -10,5 +10,5 @@ api_router.include_router(py_jwt_auth.router)
 api_router.include_router(open_ai.router)
 
 
-if settings.ENVIRONMENT == DEV_ENVIRONMENT:
+if settings.APP_ENV == DEV_ENVIRONMENT:
     api_router.include_router(private.router)

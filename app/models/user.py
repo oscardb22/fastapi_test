@@ -34,8 +34,7 @@ class Tokens(BaseModel, table=True):
     )
 
     def __repr__(self):
-        return (f"<User({self.id=}, '{self.token=}', '{self.date_joined=}', "
-                f"'{self.date_joined=}'), '{self.is_active=}')>")
+        return f"<User({self.id=}, '{self.token=}', '{self.user_id=}', {self.is_active=}')>"
 
 # Contents of JWT token
 class TokenPayload(BaseModel):

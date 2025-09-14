@@ -12,9 +12,11 @@ def override_get_db(db_session):
 
 
 class BaseTest:
-    client = TestClient(app)
-    client.headers["Content-Type"] = "application/json"
-    user = None
+    def __init__(self):
+        self.client = TestClient(app)
+        self.client.headers["Content-Type"] = "application/json"
+        self.user = None
+        self.url_version = settings.API_V1_STR
 
     def create_user(self):
         self.user = UserFactory.create(

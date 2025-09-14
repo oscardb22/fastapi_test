@@ -42,7 +42,7 @@ dev-dependencies = [
 ]
 
 [tool.coverage.run]
-omit = ["conftest.py", "__init__.py"]
+omit = ["conftest.py", "__init__.py", "init_factories.py"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
