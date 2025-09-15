@@ -11,6 +11,8 @@ class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
         model = Users
         sqlalchemy_get_or_create = (
+            "full_name",
+            "cellphone",
             "username",
             "email",
             "hashed_password",
@@ -23,6 +25,8 @@ class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
     # id = factory.Sequence(lambda n: n)
     username = factory.Sequence(lambda n: f'user{n}')
     email = factory.Faker("email", locale=settings.LANGUAGE_CODE)
+    full_name = factory.Faker("name", locale=settings.LANGUAGE_CODE)
+    cellphone = factory.Faker("phone_number", locale=settings.LANGUAGE_CODE)
     hashed_password = factory.Faker("password", locale=settings.LANGUAGE_CODE)
     is_active = True
     date_joined = datetime.now()

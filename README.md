@@ -36,4 +36,5 @@ make build           # Build Docker image
 make run_tests       # Run the tests project
 make run_linter      # Run the linter rules
 make run_linter_fix  # Run check and fix linter rules
+make run_app         # Run application
 ```

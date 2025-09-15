@@ -16,7 +16,10 @@ from app.tests.init_factories import init_factories
 
 @pytest.fixture(scope="session", autouse=True)
 def db_session() -> Generator[Session, None, None]:
-    engine = create_engine(settings.TEST_SQLALCHEMY_DATABASE_URI)
+    engine = create_engine(
+        settings.TEST_SQLALCHEMY_DATABASE_URI,
+        connect_args={"check_same_thread": False}
+    )
     try:
         # Configure Alembic
         alembic_cfg = Config(f"{settings.PROJECT_PATH}/alembic.ini")

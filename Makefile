@@ -17,3 +17,6 @@ run_linter:
 run_linter_fix:
 	uv run ruff format --force-exclude .
 	uv run ruff check --fix --force-exclude .
+
+run_app:
+	uv run uvicorn main:app --reload --app-dir ./app

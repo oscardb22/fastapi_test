@@ -28,7 +28,7 @@ def create_access_token(username: str, user_id: int, expires_delta: timedelta):
     return jwt.encode(encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
 
-def auth_user(user_name_or_email: str, password: str, db):
+def auth_user(user_name_or_email: str, password: str, db: db_dependency):
     user_data = db.query(Users).filter(Users.username == user_name_or_email).first()
     if not user_data:
         user_data = db.query(Users).filter(Users.email == user_name_or_email).first()

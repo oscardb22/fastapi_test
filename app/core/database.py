@@ -4,7 +4,10 @@ from app.core.config import settings
 from app.cruds.users import create_user
 from app.models.user import Users
 
-engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
+engine = create_engine(
+    settings.SQLALCHEMY_DATABASE_URI,
+    connect_args={"check_same_thread": False}
+)
 
 
 def init_db(session: Session) -> None:
