@@ -11,12 +11,12 @@ def override_get_db(db_session):
     yield from db_session
 
 
-class BaseTest:
+class BaseTest(TestClient):
+    user = None
     def __init__(self):
-        self.client = TestClient(app)
+        super().__init__(app=app)
         self.client.headers["Content-Type"] = "application/json"
-        self.user = None
-        self.url_version = settings.API_V1_STR
+        self.base_url = f"{self.base_url}{settings.API_V1_STR}/"
 
     def create_user(self):
         self.user = UserFactory.create(
@@ -30,7 +30,7 @@ class BaseTest:
         try:
             self.create_user()
         except Exception as error:
-            logger.error(error)
+            logger.error(f"[{url}] - {error}")
         data = {"username": settings.FIRST_SUPERUSER_EMAIL, "password": settings.FIRST_SUPERUSER_PASSWORD}
         return self.client.post(
             url,
