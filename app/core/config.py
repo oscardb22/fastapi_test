@@ -53,12 +53,14 @@ class Settings(BaseSettings):
     SECRET_KEY: str = Field(default="", env="SECRET_KEY")
     ALGORITHM: str = Field(default="", env="ALGORITHM")
     TOKEN_TYPE: str = Field(default="", env="TOKEN_TYPE")
-    OPENAI_API_KEY: str = Field(default="", env="OPENAI_API_KEY")
     URL_CHAT_OPEN_AI: str = Field(default="", env="URL_CHAT_OPEN_AI")
     REDIS_URL: str = Field(default="", env="REDIS_URL")
     LANGUAGE_CODE: str = Field(default="", env="LANGUAGE_CODE")
     PROJECT_PATH: str = PROJECT_PATH
     API_V1_STR: str = Field(default="/api/v1", env="API_V1_STR")
+
+    OPENAI_API_KEY: str = Field(default="", env="OPENAI_API_KEY")
+    GOOGLE_API_KEY: str = Field(default="", env="GOOGLE_API_KEY")
 
     @property
     def log_level_number(self) -> int:
