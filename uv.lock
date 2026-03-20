@@ -581,6 +581,15 @@ wheels = [
 ]
 
 [[package]]
+name = "docx2txt"
+version = "0.9"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/07/4486a038624e885e227fe79111914c01f55aa70a51920ff1a7f2bd216d10/docx2txt-0.9.tar.gz", hash = "sha256:18013f6229b14909028b19aa7bf4f8f3d6e4632d7b089ab29f7f0a4d1f660e28", size = 3613, upload-time = "2025-03-24T20:59:25.21Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d6/51/756e71bec48ece0ecc2a10e921ef2756e197dcb7e478f2b43673b6683902/docx2txt-0.9-py3-none-any.whl", hash = "sha256:e3718c0653fd6f2fcf4b51b02a61452ad1c38a4c163bcf0a6fd9486cd38f529a", size = 4025, upload-time = "2025-03-24T20:59:24.394Z" },
+]
+
+[[package]]
 name = "ecdsa"
 version = "0.19.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1713,6 +1722,7 @@ dependencies = [
     { name = "alembic" },
     { name = "bcrypt" },
     { name = "boto3" },
+    { name = "docx2txt" },
     { name = "email-validator" },
     { name = "fastapi" },
     { name = "fastapi-cache2-fork" },
@@ -1731,12 +1741,13 @@ dependencies = [
     { name = "pandas" },
     { name = "passlib", extra = ["bcrypt"] },
     { name = "pillow" },
-    { name = "pinecone-client" },
+    { name = "pinecone" },
     { name = "psycopg", extra = ["binary"] },
     { name = "psycopg2-binary" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "pyjwt" },
+    { name = "pypdf" },
     { name = "python-jose", extra = ["cryptography"] },
     { name = "python-multipart" },
     { name = "redis" },
@@ -1762,6 +1773,7 @@ requires-dist = [
     { name = "alembic", specifier = ">=1.16.5" },
     { name = "bcrypt", specifier = "==4.3.0" },
     { name = "boto3", specifier = ">=1.40.22" },
+    { name = "docx2txt", specifier = ">=0.9" },
     { name = "email-validator", specifier = ">=2.3.0" },
     { name = "fastapi", specifier = ">=0.116.1" },
     { name = "fastapi-cache2-fork", specifier = "==2.2.1" },
@@ -1780,12 +1792,13 @@ requires-dist = [
     { name = "pandas", specifier = ">=3.0.1" },
     { name = "passlib", extras = ["bcrypt"], specifier = ">=1.7.4" },
     { name = "pillow", specifier = ">=12.1.1" },
-    { name = "pinecone-client", specifier = ">=6.0.0" },
+    { name = "pinecone", specifier = ">=8.1.0" },
     { name = "psycopg", extras = ["binary"], specifier = "==3.2.9" },
     { name = "psycopg2-binary", specifier = "==2.9.10" },
     { name = "pydantic", specifier = ">=2.11.7" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "pyjwt", specifier = ">=2.10.1" },
+    { name = "pypdf", specifier = ">=6.9.1" },
     { name = "python-jose", extras = ["cryptography"], specifier = "==3.5.0" },
     { name = "python-multipart", specifier = ">=0.0.20" },
     { name = "redis", specifier = "==6.4.0" },
@@ -2174,19 +2187,34 @@ wheels = [
 ]
 
 [[package]]
-name = "pinecone-client"
-version = "6.0.0"
+name = "pinecone"
+version = "8.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi" },
+    { name = "orjson" },
+    { name = "pinecone-plugin-assistant" },
     { name = "pinecone-plugin-interface" },
     { name = "python-dateutil" },
     { name = "typing-extensions" },
-    { name = "urllib3", marker = "python_full_version < '4'" },
+    { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6c/ab/3ab3b81e8ad82fbfcaa4f446c7f962b18968d61543c8c9e2c38bd777c056/pinecone_client-6.0.0.tar.gz", hash = "sha256:f224fc999205e4858c4737c40922bdf42d178b361c8859bc486ec00d45b359a9", size = 7004, upload-time = "2025-02-21T19:47:38.899Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e2/e4/8303133de5b3850c85d56caf9cc23cc38c74942bb8a940890b225245d7df/pinecone-8.1.0.tar.gz", hash = "sha256:48a00843fb232ccfd57eba618f0c0294e918b030e1bc7e853fb88d04f80ba569", size = 1041965, upload-time = "2026-02-19T20:08:32.999Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5a/e4/7780cd631dc6dad0172a245e958b41b28a70779594c0790fa08b952aa97f/pinecone_client-6.0.0-py3-none-any.whl", hash = "sha256:d81a9e73cae441e4ab6dfc9c1d8b51c9895dae2488cda64f3e21b9dfc10c8d94", size = 6654, upload-time = "2025-02-21T19:47:37.23Z" },
+    { url = "https://files.pythonhosted.org/packages/4e/f7/beee7033ef92e5964e570fc29a048627e298745916e65c66105378405d06/pinecone-8.1.0-py3-none-any.whl", hash = "sha256:b0ba9c55c9a072fbe4fc7381bc3e5eb1b14550a8007233a3368ada74b1747534", size = 742745, upload-time = "2026-02-19T20:08:31.319Z" },
+]
+
+[[package]]
+name = "pinecone-plugin-assistant"
+version = "3.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c4/16/dcaff42ddfeab75dccd17685a0db46489717c3d23753dc14c55770e12aa8/pinecone_plugin_assistant-3.0.2.tar.gz", hash = "sha256:04163af282ad7895b581ab89f850ed139e4ddcea72010cadfa4c573759d5c896", size = 152066, upload-time = "2026-02-01T09:08:48.04Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4a/dd/8bc4f3baf6c03acfb0b300f5aba53d19cc3a319281da518182bf22671b92/pinecone_plugin_assistant-3.0.2-py3-none-any.whl", hash = "sha256:de21ff696219fcad6c7ec86a3d1f70875024314537758ab345b6230462342903", size = 280863, upload-time = "2026-02-01T09:08:49.384Z" },
 ]
 
 [[package]]
@@ -2515,6 +2543,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/c2/27/a3b6e5bf6ff856d2509292e95c8f57f0df7017cf5394921fc4e4ef40308a/pyjwt-2.12.1.tar.gz", hash = "sha256:c74a7a2adf861c04d002db713dd85f84beb242228e671280bf709d765b03672b", size = 102564, upload-time = "2026-03-13T19:27:37.25Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e5/7a/8dd906bd22e79e47397a61742927f6747fe93242ef86645ee9092e610244/pyjwt-2.12.1-py3-none-any.whl", hash = "sha256:28ca37c070cad8ba8cd9790cd940535d40274d22f80ab87f3ac6a713e6e8454c", size = 29726, upload-time = "2026-03-13T19:27:35.677Z" },
+]
+
+[[package]]
+name = "pypdf"
+version = "6.9.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/fb/dc2e8cb006e80b0020ed20d8649106fe4274e82d8e756ad3e24ade19c0df/pypdf-6.9.1.tar.gz", hash = "sha256:ae052407d33d34de0c86c5c729be6d51010bf36e03035a8f23ab449bca52377d", size = 5311551, upload-time = "2026-03-17T10:46:07.876Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f9/f4/75543fa802b86e72f87e9395440fe1a89a6d149887e3e55745715c3352ac/pypdf-6.9.1-py3-none-any.whl", hash = "sha256:f35a6a022348fae47e092a908339a8f3dc993510c026bb39a96718fc7185e89f", size = 333661, upload-time = "2026-03-17T10:46:06.286Z" },
 ]
 
 [[package]]

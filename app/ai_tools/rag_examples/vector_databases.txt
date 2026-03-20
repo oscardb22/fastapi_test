@@ -1,0 +1,30 @@
+https://www.pinecone.io/
+https://milvus.io/
+https://qdrant.tech/
+
+What do you think is the best vectors databases ?
+The most popular ones, each with their strengths:
+
+**Dedicated vector DBs:**
+- **Qdrant** — best performance/accuracy balance, great filtering, Rust-based, my top pick for most projects
+- **Weaviate** — good hybrid search (vector + keyword), nice GraphQL API
+- **Milvus** — great for massive scale (billions of vectors)
+- **Chroma** — simplest to get started, great for local dev and prototyping
+
+**Traditional DBs with vector support:**
+- **pgvector** (PostgreSQL) — best choice if you're already on Postgres, avoids adding a new service
+- **Redis** — good if you need low latency and already use Redis
+- **Elasticsearch** — solid if you need hybrid search and already have it
+
+**Cloud-managed:**
+- **Pinecone** — easiest fully managed option, good DX but pricey
+- **MongoDB Atlas** — convenient if already on MongoDB
+
+**My general recommendation:**
+- Just starting / prototyping → **Chroma**
+- Already on Postgres → **pgvector**
+- Production app needing performance → **Qdrant**
+- Massive scale → **Milvus**
+- Want fully managed, no ops → **Pinecone**
+
+That said, for most RAG or semantic search use cases, **pgvector** is often underrated — it avoids infrastructure complexity and is good enough for millions of vectors.

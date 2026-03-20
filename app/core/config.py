@@ -61,6 +61,7 @@ class Settings(BaseSettings):
 
     OPENAI_API_KEY: str = Field(default="", env="OPENAI_API_KEY")
     GOOGLE_API_KEY: str = Field(default="", env="GOOGLE_API_KEY")
+    PINECONE_APY_KEY: str = Field(default="", env="PINECONE_APY_KEY")
 
     @property
     def log_level_number(self) -> int:
