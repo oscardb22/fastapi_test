@@ -7,6 +7,7 @@ dependencies = [
     "alembic>=1.16.5",
     "bcrypt==4.3.0",
     "boto3>=1.40.22",
+    "chromadb>=1.5.5",
     "docx2txt>=0.9",
     "email-validator>=2.3.0",
     "fastapi>=0.116.1",
